@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import urllib, re, MySQLdb
 
-langs = ['php', 'java', 'c++', 'ruby', 'django', 'python', 'android', '.NET', 'javascript', 'asidifnnwe4dj']
+langs = ['php', 'java', 'c++', 'ruby', 'django', 'python', 'android', '.NET', 'javascript']
 jobscz = 'http://www.jobs.cz/search/?section=positions&srch%5Bq%5D='
 pracecz = 'https://www.prace.cz/search/?srch%5Blocal%5D=&srch%5Bkey%5D='
 
@@ -10,20 +10,7 @@ def jobsStr(soup):
 
 def praceStr(soup):
     return soup.find_all(id='content')[0].find_all(class_='result')[0].text
-    
-def getPrace(lang):
-    jobs = urllib.urlopen('https://www.prace.cz/search/?srch%5Blocal%5D=&srch%5Bkey%5D='+urllib.quote_plus(lang)).read()
-    soup = BeautifulSoup(jobs)
 
-    try:
-        s = soup.find_all(id='content')[0].find_all(class_='result')[0].text
-    except:
-        return 0
-   
-    if (re.search('[0-9]+', s)):
-        return re.search('[0-9]+', s).group(0)
-    else:
-        return 0
 def get(lang, url, f):
     jobs = urllib.urlopen(url+urllib.quote_plus(lang)).read()
     soup = BeautifulSoup(jobs)
