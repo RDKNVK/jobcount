@@ -34,7 +34,7 @@ for l in langs:
     gj = get(l, jobscz, jobsStr)
     gp = get(l, pracecz, praceStr)
     c.execute('INSERT INTO nabidky VALUES(%d, %d, CURDATE(), "%s")' % (int(gj), int(gp), l))
-    print l.ljust(10), gj.ljust(10), gp.ljust(10)
+    print str(l).ljust(10), str(gj).ljust(10), str(gp).ljust(10)
 
 db.commit()
 db.close()
